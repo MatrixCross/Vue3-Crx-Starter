@@ -29,6 +29,7 @@ module.exports = {
     node: true
   },
   rules: {
+    'prettier/prettier': 'off',
     'no-console': 'off',
     'no-undefined': 'off',
     'no-mixed-spaces-and-tabs': 'error',

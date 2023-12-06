@@ -1,7 +1,10 @@
 # vite-crx-template
 
 > fork from: [vite-crx-template](https://github.com/Tinsson/vite-crx-template)
-> todo: naive-ui样式不能正常作用于shadown dom里面，需要修改，可以将naive-ui换回element-plus，原代码看上面链接
+
+note: 因为contentScript里的内容使用shadow-dom注入到body，naive-ui的样式可能不正常，可以用回element-plus，也可以不用shadow-dom，看注释进行修改，要注意不用shadow-dom可能导致和原有页面样式发生冲突。
+
+## 简介
 
 简单好用的chrome插件开发模板
 

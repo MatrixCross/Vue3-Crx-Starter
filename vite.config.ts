@@ -4,6 +4,12 @@ import UnoCSS from 'unocss/vite'
 import { resolve } from 'path'
 import hotReloadBackground from './scripts/hot-reload/background'
 import { __DEV__, outputDir } from './const'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import {
+  ElementPlusResolver,
+  NaiveUiResolver
+} from 'unplugin-vue-components/resolvers'
 
 export const r = (...args: string[]) => resolve(__dirname, '.', ...args)
 
@@ -19,7 +25,24 @@ export const commonConfig = {
   },
   plugins: [
     Vue(),
-    UnoCSS()
+    UnoCSS(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+      imports: [
+        'vue',
+        {
+          'naive-ui': [
+            'useDialog',
+            'useMessage',
+            'useNotification',
+            'useLoadingBar'
+          ]
+        }
+      ]
+    }),
+    Components({
+      resolvers: [ElementPlusResolver(), NaiveUiResolver()]
+    })
   ]
 }
 

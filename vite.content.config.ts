@@ -2,12 +2,6 @@ import { defineConfig } from 'vite'
 import { r, commonConfig } from './vite.config'
 import { replaceCodePlugin } from 'vite-plugin-replace'
 import hotReloadContent from './scripts/hot-reload/content'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import {
-  ElementPlusResolver,
-  NaiveUiResolver
-} from 'unplugin-vue-components/resolvers'
 import { __DEV__, outputDir } from './const'
 
 // bundling the content script
@@ -40,23 +34,6 @@ export default defineConfig({
           to: ':host{'
         }
       ]
-    }),
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-      imports: [
-        'vue',
-        {
-          'naive-ui': [
-            'useDialog',
-            'useMessage',
-            'useNotification',
-            'useLoadingBar'
-          ]
-        }
-      ]
-    }),
-    Components({
-      resolvers: [ElementPlusResolver(), NaiveUiResolver()]
     }),
     hotReloadContent()
   ]

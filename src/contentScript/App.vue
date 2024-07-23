@@ -1,30 +1,31 @@
-<template>
-  <div data-root="true" class="root">
-    <n-config-provider :locale="zhCN">
-      <n-loading-bar-provider>
-        <n-dialog-provider>
-          <n-notification-provider>
-            <n-message-provider>
-              <content />
-            </n-message-provider>
-          </n-notification-provider>
-        </n-dialog-provider>
-      </n-loading-bar-provider>
-    </n-config-provider>
-  </div>
-</template>
-
 <script setup lang="ts">
 import {
   NConfigProvider,
-  NLoadingBarProvider,
   NDialogProvider,
-  NNotificationProvider,
+  NLoadingBarProvider,
   NMessageProvider,
-  zhCN
+  NNotificationProvider,
+  zhCN,
 } from 'naive-ui'
 import Content from './Content.vue'
 </script>
+
+<template>
+  <div data-root="true" class="root">
+    <NConfigProvider :locale="zhCN">
+      <NLoadingBarProvider>
+        <NDialogProvider>
+          <NNotificationProvider>
+            <NMessageProvider>
+              <content />
+            </NMessageProvider>
+          </NNotificationProvider>
+        </NDialogProvider>
+      </NLoadingBarProvider>
+    </NConfigProvider>
+  </div>
+</template>
+
 <style scoped>
 .root {
   position: fixed;

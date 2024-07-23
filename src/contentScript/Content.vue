@@ -1,19 +1,22 @@
 <script setup lang="ts">
-import { getCache } from './utils'
-const cache = ref<string>('')
+import { getCache, setCache } from './utils'
+
 const dialog = useDialog()
-const handleOpen = async () => {
-  const data = await getCache('key1')
-  cache.value = data.result
+async function handleOpen() {
+  await setCache('key2', 'test')
+  const data1 = await getCache('key1')
+  const data2 = await getCache('key2')
   dialog.warning({
     title: '这是插件弹窗',
-    content: `This is a test message for ContentScript - ${cache.value}`
+    content: `Background setCache - ${data1};Content setCache - ${data2}`,
   })
 }
 </script>
 
 <template>
   <div>
-    <n-button type="primary" @click="handleOpen">Open</n-button>
+    <n-button type="primary" @click="handleOpen">
+      Open
+    </n-button>
   </div>
 </template>

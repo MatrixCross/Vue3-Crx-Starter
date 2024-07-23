@@ -5,7 +5,7 @@
     "vue"
   ],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "vue.features.codeActions.enable": false
 }

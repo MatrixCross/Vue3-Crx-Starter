@@ -1,4 +1,4 @@
-export const onMessage = (taskId: string, callback) => {
+export function onMessage(taskId: string, callback) {
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     const { params } = request
     if (request.taskId === taskId) {
@@ -7,7 +7,8 @@ export const onMessage = (taskId: string, callback) => {
         result.then((info) => {
           sendResponse(info)
         })
-      } else {
+      }
+      else {
         sendResponse(result)
       }
     }
@@ -15,16 +16,16 @@ export const onMessage = (taskId: string, callback) => {
   })
 }
 
-export const sendMessage = (taskId: string, params: any) => {
+export function sendMessage(taskId: string, params: any) {
   return new Promise((resolve) => {
     chrome.runtime.sendMessage(
       {
         taskId,
-        params
+        params,
       },
       (result) => {
         resolve(result)
-      }
+      },
     )
   })
 }

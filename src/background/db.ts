@@ -1,4 +1,5 @@
-import { IDBPDatabase, openDB } from 'idb'
+import type { IDBPDatabase } from 'idb'
+import { openDB } from 'idb'
 import { onMessage } from './utils'
 
 /**
@@ -38,7 +39,7 @@ class CrxIndexDB {
     const store = tx.objectStore(tableName)
     const result = await store.put({
       keyName,
-      value
+      value,
     })
     return result
   }
@@ -73,40 +74,29 @@ class CrxIndexDB {
   }
 
   private registerMessage() {
-    onMessage('get-value-bg', async (params): Promise<any> => {
+    onMessage('get-value-bg', async (params: { keyName: string }): Promise<any> => {
       try {
-        const res = await this.getValue(params.keyName)
-        return {
-          result: res
-        }
-      } catch (e) {
-        return {
-          result: null
-        }
+        return await this.getValue(params.keyName)
+      }
+      catch {
+        return null
       }
     })
-    onMessage('set-value-bg', async ({ data }): Promise<any> => {
+    onMessage('set-value-bg', async (params: { keyName: string, value: any }): Promise<any> => {
       try {
-        const res = await this.setValue(data.keyName, data.value)
-        return {
-          result: res
-        }
-      } catch (e) {
-        return {
-          result: null
-        }
+        const { keyName, value } = params
+        return await this.setValue(keyName, value)
+      }
+      catch {
+        return null
       }
     })
-    onMessage('del-value-bg', async ({ data }): Promise<any> => {
+    onMessage('del-value-bg', async (params: { keyName: string }): Promise<any> => {
       try {
-        const res = await this.deleteValue(data.keyName)
-        return {
-          result: res
-        }
-      } catch (e) {
-        return {
-          result: null
-        }
+        return await this.deleteValue(params.keyName)
+      }
+      catch {
+        return null
       }
     })
   }
@@ -120,11 +110,12 @@ class CrxIndexDB {
             return
           }
           db.createObjectStore(tableName, {
-            keyPath: 'keyName'
+            keyPath: 'keyName',
           })
-        }
+        },
       })
-    } catch (error) {
+    }
+    catch {
       return false
     }
   }

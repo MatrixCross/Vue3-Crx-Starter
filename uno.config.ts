@@ -1,4 +1,4 @@
-import { defineConfig, presetUno, presetIcons } from 'unocss'
+import { defineConfig, presetIcons, presetUno } from 'unocss'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 
 export default defineConfig({
@@ -7,11 +7,10 @@ export default defineConfig({
     presetUno({ dark: 'class' }),
     presetIcons({
       collections: {
-        custom: FileSystemIconLoader('./src/assets/svg', (svg) =>
-          svg.replace(/#fff/, 'currentColor')
-        )
-      }
-    })
+        custom: FileSystemIconLoader('./src/assets/svg', svg =>
+          svg.replace(/#fff/, 'currentColor')),
+      },
+    }),
   ],
   shortcuts: {
     'wh-full': 'w-full h-full',
@@ -47,7 +46,7 @@ export default defineConfig({
     'fixed-center': 'fixed-lt flex-center wh-full',
     'nowrap-hidden': 'whitespace-nowrap overflow-hidden',
     'ellipsis-text': 'nowrap-hidden overflow-ellipsis',
-    'transition-base': 'transition-all duration-300 ease-in-out'
+    'transition-base': 'transition-all duration-300 ease-in-out',
   },
   theme: {
     colors: {
@@ -71,7 +70,7 @@ export default defineConfig({
       error_hover: 'var(--error-color-hover)',
       error_pressed: 'var(--error-color-pressed)',
       error_active: 'var(--error-color-active)',
-      dark: '#18181c'
-    }
-  }
+      dark: '#18181c',
+    },
+  },
 })

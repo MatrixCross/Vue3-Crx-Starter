@@ -1,8 +1,8 @@
 import type { Plugin } from 'vite'
 import WebSocket from 'ws'
-import { bgUpdatePort, __DEV__ } from '../../const'
+import { __DEV__, bgUpdatePort } from '../../const'
 
-const hotReloadContent = (): Plugin => {
+function hotReloadContent(): Plugin {
   let wsClient = null
   let isReady = false
   const connectWs = () => {
@@ -13,7 +13,8 @@ const hotReloadContent = (): Plugin => {
           isReady = true
         }
       }
-    } catch (e) {
+    }
+    catch {
       setTimeout(connectWs, 1000)
     }
   }
@@ -23,7 +24,7 @@ const hotReloadContent = (): Plugin => {
     enforce: 'pre',
     configResolved() {
       if (__DEV__) {
-        connectWs() 
+        connectWs()
       }
     },
     writeBundle() {
@@ -31,7 +32,7 @@ const hotReloadContent = (): Plugin => {
       if (wsClient && isReady) {
         wsClient.send('UPDATE_CONTENT_SCRIPT')
       }
-    }
+    },
   }
 }
 

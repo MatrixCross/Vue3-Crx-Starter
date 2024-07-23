@@ -28,6 +28,7 @@ export const commonConfig = {
     UnoCSS(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
+      dts: 'typings/auto-import.d.ts',
       imports: [
         'vue',
         {
@@ -41,7 +42,8 @@ export const commonConfig = {
       ]
     }),
     Components({
-      resolvers: [ElementPlusResolver(), NaiveUiResolver()]
+      resolvers: [ElementPlusResolver(), NaiveUiResolver()],
+      dts: 'typings/components.d.ts',
     })
   ]
 }
